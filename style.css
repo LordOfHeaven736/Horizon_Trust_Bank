@@ -1,10 +1,12 @@
 /* Basic Reset and Variables */
 :root {
-    --primary-blue: #003366; /* Deep Bank Blue */
+    --primary-blue: #003366;
+    /* Deep Bank Blue */
     --secondary-blue: #007bff;
     --light-gray: #f4f4f4;
     --text-color: #333;
     --white: #ffffff;
+    --dark-overlay: rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -14,7 +16,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     color: var(--text-color);
     background-color: var(--light-gray);
 }
@@ -45,7 +47,7 @@ a {
 }
 
 .logo img {
-    height: 30px; /* Placeholder size */
+    height: 30px;
     vertical-align: middle;
     margin-right: 10px;
 }
@@ -55,13 +57,20 @@ a {
     font-size: 1.2em;
 }
 
-.user-links a, .utility-links a {
-    margin-left: 15px;
-    opacity: 0.8;
+.utility-info {
+    padding: 5px 10px;
+    background-color: #002244;
+    border-radius: 4px;
 }
 
-.user-links a:hover, .utility-links a:hover {
-    opacity: 1;
+/* New CSS for Menu Toggle */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5em;
+    cursor: pointer;
 }
 
 /* --- Main Navigation Bar --- */
@@ -87,10 +96,12 @@ a {
     display: block;
     font-weight: bold;
     color: var(--primary-blue);
-    border-bottom: 3px solid transparent; /* For hover/active effect */
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
 }
 
-.main-menu li a:hover, .active-link {
+.main-menu li a:hover,
+.active-link {
     color: var(--secondary-blue) !important;
     border-bottom-color: var(--secondary-blue) !important;
 }
@@ -109,8 +120,13 @@ a {
     border: none;
     cursor: pointer;
     border-radius: 0 4px 4px 0;
-    margin-left: -5px; /* Pull to touch search bar */
+    margin-left: -5px;
     font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+    background-color: #0069d9;
 }
 
 /* --- Main Content Sections --- */
@@ -118,11 +134,15 @@ main {
     padding: 30px 0;
 }
 
+.section {
+    margin-bottom: 30px;
+}
+
 .section-title {
     font-size: 1.6em;
     color: var(--primary-blue);
     margin-bottom: 20px;
-    font-weight: normal;
+    font-weight: 600;
 }
 
 /* Card Grid for Insta Services */
@@ -133,36 +153,35 @@ main {
     margin-bottom: 30px;
 }
 
-.card {
+.card,
+.tile-card {
     background-color: var(--white);
     padding: 20px;
     border: 1px solid #eee;
     text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
-.card:hover {
+.card:hover,
+.tile-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .icon-placeholder {
-    font-size: 2em;
+    font-size: 2.5em;
     color: var(--secondary-blue);
     margin-bottom: 10px;
 }
 
-.card h3 {
+.card h3,
+.tile-card h4 {
     font-size: 1.1em;
     color: var(--primary-blue);
     margin-bottom: 5px;
-}
-
-.card p {
-    font-size: 0.9em;
-    color: #666;
 }
 
 /* Split Content (Calculators/Need Help) */
@@ -172,62 +191,193 @@ main {
     gap: 40px;
 }
 
-.content-left, .content-right {
+.content-left,
+.content-right {
     flex: 1;
     background-color: var(--white);
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Calculator Styles --- */
+.calculator-form {
+    padding-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    outline: none;
+}
+
+.calculator-results {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-left: 5px solid var(--secondary-blue);
+    background-color: var(--light-gray);
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.calc-item {
-    padding: 15px 0;
-    border-bottom: 1px dashed #eee;
-    cursor: pointer;
+.calculator-results h4 {
+    font-size: 1.3em;
+    margin-bottom: 10px;
 }
 
-.calc-item:hover h4 {
-    color: var(--secondary-blue);
+.result-value {
+    color: #28a745;
+    font-weight: bold;
 }
 
-.calc-item h4 {
+.calculator-results p {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+    border-top: 1px dashed #ddd;
+    padding-top: 5px;
+}
+
+/* --- Exchange Rate Widget Styles --- */
+.exchange-rates-widget {
+    margin-top: 30px;
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.rates-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.rate-item {
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+.rate-item h5 {
+    font-size: 1em;
     color: var(--primary-blue);
     margin-bottom: 5px;
 }
 
-.help-links {
-    list-style: none;
+.rate-value {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #cc4444;
+    /* Denotes foreign exchange */
 }
 
-.help-links li a {
-    display: block;
-    padding: 10px 0;
-    color: var(--primary-blue);
-    border-bottom: 1px dashed #eee;
-}
-
-.help-links li a:hover {
-    text-decoration: underline;
-    color: var(--secondary-blue);
-}
-
-/* Ways to Bank Tiles */
-.ways-to-bank-grid {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.tile-card {
-    background-color: var(--white);
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+/* --- Other Dynamic Pages Styles (PAY, INVEST, etc.) --- */
+.dynamic-page {
+    min-height: 40vh;
+    padding: 40px;
     text-align: center;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    margin-top: 20px;
+    background-color: var(--white);
+}
+
+.dynamic-page h2 {
+    color: var(--secondary-blue);
+    margin-bottom: 20px;
+}
+
+
+/* --- Modal Styles --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--dark-overlay);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: var(--white);
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #000;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.tile-card.premier {
-    background-color: #f7f7f7; /* Slightly different background for premium */
+#modal-service-title {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
 }
+
+.modal-action-btn {
+    background-color: var(--secondary-blue);
+    color: var(--white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+}
+
+.modal-action-btn:hover {
+    background-color: #0069d9;
+}
+
 
 /* --- Footer Area --- */
 .main-footer {
@@ -266,9 +416,324 @@ main {
     text-decoration: underline;
 }
 
+.social-links i {
+    margin-right: 5px;
+}
+
 .copyright {
     background-color: #002244;
     padding: 15px 0;
     text-align: center;
     font-size: 0.8em;
 }
+
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+
+    .desktop-only {
+        display: none !important;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-nav-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-top: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .main-nav-content.active {
+        max-height: 500px;
+        padding-top: 10px;
+    }
+
+    .main-menu {
+        flex-direction: column;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+
+    .main-menu li a {
+        padding: 10px 15px;
+        border-bottom: none !important;
+    }
+
+    .search-login {
+        width: 100%;
+        display: flex;
+        padding: 10px 0;
+    }
+
+    .search-login input {
+        flex-grow: 1;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .card-grid,
+    .split-content,
+    .footer-grid,
+    .rates-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        flex-direction: column;
+    }
+
+    .modal-content {
+        margin: 20% 10%;
+        width: 80%;
+    }
+}
+
+/* ... (Existing CSS remains the same) ... */
+
+/* Split Content (Calculators/Need Help) - EXISTING STYLES */
+.content-left,
+.content-right {
+    flex: 1;
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* --- New FAQ/Accordion Styles --- */
+.faq-accordion {
+    margin-bottom: 20px;
+}
+
+.accordion-item {
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    width: 100%;
+    background-color: var(--light-gray);
+    color: var(--primary-blue);
+    padding: 12px 15px;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.accordion-header:hover {
+    background-color: #e9e9e9;
+}
+
+.accordion-header i {
+    transition: transform 0.3s ease;
+}
+
+.accordion-header.active i {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    background-color: var(--white);
+    padding: 0 15px;
+    max-height: 0;
+    /* Initially hidden */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+.accordion-content p {
+    padding: 10px 0;
+    font-size: 0.9em;
+    color: #555;
+    border-top: 1px solid #eee;
+    /* Separator line inside content */
+}
+
+/* ... (Existing CSS remains the same) ... */
+
+/* --- Main Navigation Bar --- */
+.main-nav-bar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+}
+
+.main-nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* ... (Existing .main-menu styles remain) ... */
+
+/* --- New Search/Login Container Styles --- */
+.search-login-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between search box and login button */
+}
+
+.search-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.search-box input {
+    padding: 8px 10px;
+    border: none;
+    /* Input border handled by .search-box */
+    outline: none;
+    border-radius: 0;
+}
+
+.search-action-btn {
+    background-color: var(--light-gray);
+    /* Light gray background for search icon */
+    color: var(--primary-blue);
+    padding: 8px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+.search-action-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.login-btn {
+    /* Login button remains blue and separate */
+    background-color: var(--secondary-blue);
+    color: var(--white);
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    /* Now fully rounded */
+    font-weight: bold;
+    transition: background-color 0.2s;
+    margin-left: 0;
+    /* Remove negative margin */
+}
+
+.login-btn:hover {
+    background-color: #0069d9;
+}
+
+/* ... (Remaining CSS and Media Queries remain the same) ... */
+
+/* Adjust mobile search style */
+@media (max-width: 768px) {
+    /* ... (Existing mobile styles remain the same) ... */
+
+    .search-login-container {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .login-btn {
+        width: 100%;
+    }
+}
+
+
+/* ... (Existing CSS remains the same) ... */
+
+/* --- NEW: Account Overview Styles --- */
+.account-overview-section {
+    padding-bottom: 0;
+    /* Remove padding for separation */
+}
+
+.account-selector-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--primary-blue);
+    color: var(--white);
+    padding: 15px 25px;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: -1px;
+    /* Overlap border with details card */
+    font-weight: 500;
+}
+
+#account-select {
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: var(--white);
+    color: var(--primary-blue);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.account-details-card {
+    background-color: var(--white);
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.account-details-card h3 {
+    color: var(--secondary-blue);
+    margin-bottom: 10px;
+    font-size: 1.4em;
+}
+
+.account-detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+    font-size: 1.1em;
+}
+
+.account-detail-item:last-child {
+    border-bottom: none;
+    font-weight: bold;
+}
+
+.status-tag {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: var(--white);
+}
+
+.status-active {
+    background-color: #28a745;
+}
+
+.status-credit {
+    background-color: #cc4444;
+}
+
+.status-locked {
+    background-color: #ffc107;
+    color: var(--text-color);
+}
+
+/* ... (Remaining CSS remains the same) ... */
